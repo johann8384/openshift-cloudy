@@ -1,0 +1,47 @@
+extends ../layout
+block head
+  include ../datatables_css
+
+block content
+ .container.col-xs-16.col-md-12
+    .row
+      .page-header
+        h1 Current Support Info
+        .alert.alert-info
+          p This page is temporarily disabled.
+    .row
+      .col-xs-12.col-md-8
+        .panel.panel-default
+          .panel-heading Helpdesk Events
+          .panel-body
+            table(id="table_events").table.table-condensed
+              thead
+                tr
+                  th Time
+                  th User
+                  th Action
+              tbody
+      .col-xs-6.col-md-4
+        .panel.panel-default
+          .panel-heading Company Status
+          .panel-body
+            .row
+              .col-xs-7.col-md-5
+                h4 Ticket Status
+                p Low
+                  span.label.label-primary.pull-right #{ticket_count.low}
+                p Normal
+                  span.label.label-success.pull-right #{ticket_count.normal}
+                p High
+                  span.label.label-warning.pull-right #{ticket_count.high}
+                p Urgent
+                  span.label.label-danger.pull-right #{ticket_count.urgent}
+              .col-xs-7.col-md-5
+                h4 Order Status
+                p New Orders
+                  span.badge.pull-right 0
+                p Recently Completed
+                  span.badge.pull-right 0
+
+block footer
+  include ../datatables_js

@@ -1,0 +1,32 @@
+extends layout
+
+block content
+    if !user
+        form(action='/account/login',method='post').form-signin
+            h2.form-signin.heading Please sign in
+            .input-group.margin-bottom-sm
+              span.input-group-addon
+                i.fa.fa-envelope-o.fa-fw
+              input(type='text', placeholder="email", name='username').form-control
+            .input-group.margin-bottom-sm
+              span.input-group-addon
+                i.fa.fa-key.fa-fw
+              input(type='password', placeholder="password", name='password').form-control
+            .submit
+                input(type='submit', name='submit').btn.btn-lg.btn-primary.btn-block
+    else
+      div.container
+          div.content
+              table.table.table-striped
+                  thead
+                      tr
+                          th Table
+                          th Heading
+                  tbody
+                      tr
+                          td Blah
+                          td Test
+                      tr
+                          td Hello
+                          td World
+    div.footer

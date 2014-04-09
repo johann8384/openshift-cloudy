@@ -1,0 +1,58 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/opt/boxen/nodenv/versions/v0.10/bin/node',
+1 verbose cli   '/opt/boxen/nodenv/versions/v0.10/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'datatables' ]
+2 info using npm@1.3.2
+3 info using node@v0.10.13
+4 verbose node symlink /opt/boxen/nodenv/versions/v0.10/bin/node
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ 'datatables', null ]
+7 verbose cache add name=undefined spec="datatables" args=["datatables",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'datatables',
+8 verbose parsed url   path: 'datatables',
+8 verbose parsed url   href: 'datatables' }
+9 silly lockFile 69bc8529-datatables datatables
+10 verbose lock datatables /Users/jonathan/.npm/69bc8529-datatables.lock
+11 silly lockFile 69bc8529-datatables datatables
+12 silly lockFile 69bc8529-datatables datatables
+13 verbose addNamed [ 'datatables', '' ]
+14 verbose addNamed [ null, '*' ]
+15 silly lockFile 5154379d-datatables datatables@
+16 verbose lock datatables@ /Users/jonathan/.npm/5154379d-datatables.lock
+17 silly addNameRange { name: 'datatables', range: '*', hasData: false }
+18 verbose url raw datatables
+19 verbose url resolving [ 'https://registry.npmjs.org/', './datatables' ]
+20 verbose url resolved https://registry.npmjs.org/datatables
+21 info trying registry request attempt 1 at 13:35:31
+22 http GET https://registry.npmjs.org/datatables
+23 http 404 https://registry.npmjs.org/datatables
+24 silly registry.get cb [ 404,
+24 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R15B03)',
+24 silly registry.get     date: 'Wed, 11 Dec 2013 19:35:32 GMT',
+24 silly registry.get     'content-type': 'application/json',
+24 silly registry.get     'content-length': '52',
+24 silly registry.get     'cache-control': 'must-revalidate' } ]
+25 silly lockFile 5154379d-datatables datatables@
+26 silly lockFile 5154379d-datatables datatables@
+27 error 404 'datatables' is not in the npm registry.
+27 error 404 You should bug the author to publish it
+27 error 404
+27 error 404 Note that you can also install from a
+27 error 404 tarball, folder, or http url, or git url.
+28 error System Darwin 12.5.0
+29 error command "/opt/boxen/nodenv/versions/v0.10/bin/node" "/opt/boxen/nodenv/versions/v0.10/bin/npm" "install" "datatables"
+30 error cwd /Users/jonathan/WebstormProjects/cloudykangaroo/public
+31 error node -v v0.10.13
+32 error npm -v 1.3.2
+33 error code E404
+34 verbose exit [ 1, true ]

@@ -1,0 +1,45 @@
+extends ../layout
+block head
+  include ../datatables_css
+block navbar
+block content
+  .container
+    .page-header
+      h1 Current Client List
+    .container
+      table(id="tableid").table.table-condensed.table-striped
+        thead
+          tr
+            th Hostname
+            th Puppet
+            th Sensu
+            th Ubersmith
+        tbody
+block footer
+  include ../datatables_js
+  script(type='text/javascript').
+    $(document).ready(function() {
+      $('tableid').dataTable( {
+        "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "sAjaxSource": '/devices',
+          "iDisplayLength": 10,
+          "bStateSave": true,
+          "bDeferRender": true,
+          "bSortClasses": false,
+          "aoColumns": [
+            {
+              "mData": "hostname"
+            }, {
+              "mData": "puppet"
+            }, {
+              "mData": "sensu"
+            }, {
+              "mData": "ubersmith"
+            }],
+            "aaSorting": [[0,'asc']],
+            "oLanguage": {
+              "sLengthMenu": "_MENU_ records per page"
+            }
+      });
+    });

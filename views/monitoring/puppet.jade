@@ -1,0 +1,89 @@
+extends ../layout
+block head
+  include ../datatables_css
+block navbar
+block content
+  .container.col-xs-16.col-md-12
+    .row
+      .page-header
+        h1 Puppet Catalog Stats
+    .row
+      .col-md-6
+        .panel.panel-default
+          .panel-heading
+            p Node Population
+          .panel-body
+            #numNodes.gauge
+            #numResources.gauge
+            #resourceDupes.gauge
+            #resourcesPerNode.gauge
+      .col-md-6
+        .panel.panel-default
+          .panel-heading
+            p Reported Resource Stats
+              span.pull-right (Last 4 hours)
+          .panel-body
+            #successGauge.gauge
+            #failuresGauge.gauge
+            //#noopsGauge.gauge
+            #skipsGauge.gauge
+            .tile(style="margin-top: -56px")
+              .tile-heading Total Reports
+              .tile-text 0
+    .row
+      .col-xs-16.col-md-12
+        .panel.panel-default
+          .panel-heading
+            .navbar
+              .navbar-header.pull-left
+                p.navbar-brand Failure List
+              .navbar-header.pull-right
+                span (Last #{hoursAgo} hours)
+          .panel-body
+            table(id="table_failures").table.table-condensed
+              thead
+                tr
+                  th Hostname
+                  th Type
+                  th Timestamp
+                  th Message
+              tbody
+
+block footer
+  include ../datatables_js
+  script(src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js")
+  script(src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js")
+  script(src="/javascripts/justgage.1.0.1.min.js")
+  script(src="/javascripts/puppet_gauges.js")
+  script(type='text/javascript').
+    $(document).ready(function() {
+      $('#table_failures').dataTable( {
+        "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+        "sPaginationType": "bootstrap",
+        "sAjaxSource": '/api/v1/puppet/failures/hours/#{hoursAgo}',
+        "iDisplayLength": 20,
+        "bStateSave": true,
+        "bDeferRender": true,
+        "bSortClasses": false,
+        "aoColumns": [
+          {
+            "mData": "certname",
+            "sWidth": "220px"
+          }, {
+            "mData": "resource-type",
+            "sWidth": "50px"
+          }, {
+            "mData": "timestamp",
+            "mRender": function(timestamp) {
+              return moment(timestamp).format('MMM DD H:mm:ss');
+            },
+            "sWidth": "60px"
+          }, {
+            "mData": "message"
+          }],
+        "aaSorting": [[2,'desc']],
+        "oLanguage": {
+          "sLengthMenu": "_MENU_ records per page"
+        }
+      });
+    });

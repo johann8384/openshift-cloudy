@@ -1,0 +1,82 @@
+extends ../layout
+block head
+  include ../datatables_css
+
+block content
+    .page-header
+      h1 Device List
+    .container
+      ul(class="nav nav-tabs", id="deviceTypeTab")
+        each group,group_id in device_types
+          if group_id != 0
+            li(id="li_groupid_#{group.devtype_group_id}")
+              a(href="#groupid_#{group.devtype_group_id}", data-toggle="tab") #{group.name}
+      .tab-content(id="tab-content")
+        each group,group_id in device_types
+          if group_id != 0
+              .tab-pane(id="groupid_#{group.devtype_group_id}")
+                table(id="tableid_#{group.devtype_group_id}").table.table-condensed.table-striped
+                  thead
+                    tr
+                      th ID
+                      th Type
+                      th Hostname
+                      th Company
+                      th Location
+                      th Mgmt Level
+                      th Status
+                  tbody
+
+block footer
+  include ../datatables_js
+  each group,group_id in device_types
+    if group_id != 0
+        script(type='text/javascript').
+          $('#groupid_#{group.devtype_group_id} a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+          });
+
+        script(type='text/javascript').
+          $(document).ready(function() {
+            $('#tableid_#{group.devtype_group_id}').dataTable( {
+              "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+              "sPaginationType": "bootstrap",
+              "sAjaxSource": '/api/v1/helpdesk/devices/devgroupid/#{group.devtype_group_id}',
+              "iDisplayLength": 10,
+              "bStateSave": true,
+              "bDeferRender": true,
+              "bSortClasses": false,
+              "aoColumns": [
+              {
+                "mData": "dev",
+                "mRender": function (dev) {
+                            return '<a href="/helpdesk/devices/deviceid/'+dev+'">' + dev + '</a>';
+                          }
+              }, {
+                "mData": "type"
+              }, {
+                "mData": "dev_desc",
+                "mRender": function (dev_desc, type, row) {
+                  return '<a href="/helpdesk/devices/deviceid/' + row['dev'] + '">' + dev_desc + '</a>';
+                }
+              }, {
+                "mData": "company",
+                "mRender": function (company, type, row) {
+                  return '<a href="/helpdesk/clients/clientid/'+row['clientid']+'">' + company + '</a>';
+                }
+              }, {
+                "mData": "location"
+              }, {
+                "mData": "management_level"
+              }, {
+                "mData": "device_status"
+              }],
+              "aaSorting": [[4,'asc']],
+              "oLanguage": {
+                "sLengthMenu": "_MENU_ records per page"
+              }
+            });
+          });
+  script(type='text/javascript').
+    $('#deviceTypeTab a:first').tab('show');

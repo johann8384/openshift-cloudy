@@ -1,0 +1,68 @@
+extends ../layout
+block head
+  link(rel='stylesheet', href='/stylesheets/bootstrap-sortable.css')
+block navbar
+block content
+  .container.col-xs-20.col-md-12
+    .row
+      .page-header
+        h1 Current System Info
+    .row
+      .col-md-5
+        .panel.panel-default
+          .panel-heading Monitoring Stats
+          .panel-body
+            #daysSinceIncident.tile.short.text-info
+              .tile-heading.short Days Since<br/>Last Incident
+              .tile-text #{sinceLastIncident}
+            #sensuCheckCount.tile.short.text-info
+              .tile-heading.short Active Checks
+              .tile-text 7435
+            #sensuHostCount.tile.short.text-info
+              .tile-heading.short Active Clients
+              .tile-text 735
+      .col-md-7
+        .panel.panel-default
+          .panel-heading Check Stats
+          .panel-body
+            #sensuHostCount.tile.short
+              .tile-heading.short Checks CRITICAL
+              .tile-text.short.text-danger 171
+            #sensuHostCount.tile.short
+              .tile-heading.short Checks WARNING
+              .tile-text.short.text-warning 101
+            #sensuHostCount.tile.short
+              .tile-heading.short Checks OK
+              .tile-text.text-success.short 7162
+            #sensuHostCount.tile.short
+              .tile-heading.short Checks UNKNOWN
+              .tile-text.text-primary.short 1
+
+    .row
+      .col-md-5
+        .panel.panel-default
+          .panel-heading Sensu
+          .panel-body
+            p Sensu Version: #{info.sensu.version}
+        .panel.panel-default
+          .panel-heading Redis
+          .panel-body
+            p(class=(info.redis.connected === true)? "alert alert-success" : "alert alert-danger") Connected: #{info.redis.connected}
+      .col-md-7
+        .panel.panel-default
+          .panel-heading RabbitMQ
+          .panel-body
+            p(class=(info.rabbitmq.connected === true)? "alert alert-success" : "alert alert-danger") Connected: #{info.rabbitmq.connected}
+            .row
+              .col-xs-7.col-md-4
+                h4 Results
+                p Messages
+                  span.badge.pull-right #{info.rabbitmq.results.messages}
+                p Consumers
+                  span.badge.pull-right #{info.rabbitmq.results.consumers}
+              .col-xs-7.col-md-4
+                h4 KeepAlives
+                p Messages
+                  span.badge.pull-right #{info.rabbitmq.keepalives.messages}
+                p Consumers
+                  span.badge.pull-right #{info.rabbitmq.keepalives.consumers}

@@ -1,0 +1,34 @@
+extends ../layout_nologin
+block head
+
+block content
+  .container.col-md-12
+    .row
+      .jumbotron
+        h2 Welcome to the Support Center!
+        hr
+        h4 Every support request is assigned a unique ticket number which you can use to track the progress and responses online.
+        h4 For your reference we provide complete archives and history of all your support requests. A valid email address is required to submit a ticket.
+        p: a(href="/tickets/new").btn.btn-primary.btn-large Open a New Ticket &raquo;
+    .row
+      .col-md-6
+        .row
+          .col-md-2
+            a(href="/tickets/new")
+              img(src="/images/new_ticket_icon.png")
+          .col-md-9
+            h4 Open a New Ticket
+            p To update a previously submitted ticket, please
+              a(href="/tickets/list") &nbsp;go here
+            a(href="/tickets/new").btn.btn-success Open a New Ticket
+      .col-md-6
+        .row
+          .col-md-2
+            a(href="/tickets/list")
+              img(src="/images/check_status_icon.png")
+          .col-md-7
+            h4 Check Your Tickets
+            p Check the status of all your current tickets.
+            a(href="/tickets/list").btn.btn-info View All Tickets
+    .row &nbsp;
+block footer
