@@ -42,7 +42,7 @@ config.redis.db = process.env.REDIS_DB || 1;
 config.redis.cache = process.env.REDIS_CACHE || 6;
 config.redis.ttl = process.env.REDIS_TTL || 300; /*seconds*/
 
-config.http.port = process.env.PORT || 3000;
+config.http.port = process.env.OPENSHIFT_NODEJS_PORT;
 config.cookie.secret = 'securit3333!!';
 config.support = {};
 
