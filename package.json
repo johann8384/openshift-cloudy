@@ -20,7 +20,7 @@
     "url": "https://github.com/cloudykangaroo/cloudykangaroo/blob/master/LICENSE"
   },
   "scripts": {
-    "start": "forever start -a -l c/var/log/cloudykangaroo/forever.log -o /var/log/cloudykangaroo/out.log -e /var/log/cloudykangaroo/err.log server.js",
+    "start": "node server.js",
   },
   "devDependencies": {
     "fakeredis": "0.1.x",
